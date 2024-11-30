@@ -1,89 +1,153 @@
       
 document.addEventListener('DOMContentLoaded', function () {
-    // Smooth scroll para os links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
+  // Função para verificar se é dispositivo móvel de forma mais robusta
+  function isMobileDevice() {
+      return (
+          'ontouchstart' in window || 
+          navigator.maxTouchPoints > 0 || 
+          /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+      );
+  }
 
-    // Seleciona os elementos que terão fade-in
-    const elements = document.querySelectorAll('.product-card, .reel-card');
+  // Smooth scroll com verificação de segurança
+  function smoothScroll(e) {
+      e.preventDefault();
+      try {
+          const targetId = this.getAttribute('href');
+          const target = document.querySelector(targetId);
+          
+          if (target) {
+              target.scrollIntoView({
+                  behavior: 'smooth',
+                  block: 'center' // Centraliza o elemento na tela
+              });
+          } else {
+              console.warn(`Elemento de destino não encontrado: ${targetId}`);
+          }
+      } catch (error) {
+          console.error('Erro no smooth scroll:', error);
+      }
+  }
 
-    // Observador para verificar a interseção dos elementos com rootMargin
-    const observer = new IntersectionObserver(
-        entries => {
-            entries.forEach(entry => {
-                const video = entry.target.querySelector('video');
+  // Adiciona smooth scroll com tratamento de erros
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', smoothScroll);
+  });
 
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = 1; // Animação de fade-in
+  // Função segura para atualizar o ícone de áudio
+  function safeUpdateAudioIcon(video, iconElement) {
+      if (!video || !iconElement) return;
 
-                    // Reproduz o vídeo e ativa o som ao entrar na área visível
-                    if (video) {
-                        video.muted = false; // Som ativo
-                        video.play(); // Reproduz o vídeo
-                        const audioIcon = entry.target.querySelector('.audio-toggle i');
-                        if (audioIcon) updateAudioIcon(video, audioIcon);
-                    }
-                } else {
-                    // Pausa e silencia o vídeo ao sair da área configurada
-                    if (video) {
-                        video.pause();
-                        video.muted = true; // Silenciar
-                        const audioIcon = entry.target.querySelector('.audio-toggle i');
-                        if (audioIcon) updateAudioIcon(video, audioIcon);
-                    }
-                }
-            });
-        },
-        {
-            rootMargin: '-180px 0px -100px 0px' // Ajusta quando o vídeo será ativado/desativado
-        }
-    );
+      try {
+          if (video.muted) {
+              iconElement.classList.replace('fa-volume-up', 'fa-volume-mute');
+          } else {
+              iconElement.classList.replace('fa-volume-mute', 'fa-volume-up');
+          }
+      } catch (error) {
+          console.error('Erro ao atualizar ícone de áudio:', error);
+      }
+  }
 
-    // Configurações iniciais para os elementos observados
-    elements.forEach(element => {
-        element.style.opacity = 0; // Inicialmente invisível
-        element.style.transition = 'opacity 0.5s ease-in'; // Transição suave
-        observer.observe(element); // Observar elemento
-    });
+  // Configuração de observação com opções mais flexíveis
+  const observerOptions = {
+      root: null, // usa viewport como root
+      rootMargin: '-15% 0px -15% 0px', // Porcentagem mais responsiva
+      threshold: 0.5 // Elemento precisa estar 50% visível
+  };
 
-    // Alterna o áudio quando o botão de som é clicado
-    document.querySelectorAll('.audio-toggle').forEach(button => {
-        button.addEventListener('click', function () {
-            const video = this.closest('.reel-card').querySelector('video');
-            if (video) {
-                video.muted = !video.muted; // Alterna o estado do som
-                const audioIcon = this.querySelector('i');
-                if (audioIcon) updateAudioIcon(video, audioIcon); // Atualiza o ícone
-            }
-        });
-    });
+  // Observador de interseção com tratamento de erros
+  const intersectionObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+          try {
+              const video = entry.target.querySelector('video');
+              const audioIcon = entry.target.querySelector('.audio-toggle i');
 
-    // Função para atualizar o ícone de áudio
-    function updateAudioIcon(video, iconElement) {
-        if (video.muted) {
-            iconElement.classList.remove('fa-volume-up');
-            iconElement.classList.add('fa-volume-mute');
-        } else {
-            iconElement.classList.remove('fa-volume-mute');
-            iconElement.classList.add('fa-volume-up');
-        }
-    }
+              if (entry.isIntersecting) {
+                  // Fade in com transição suave
+                  entry.target.style.opacity = 1;
 
-    // Remove a opção de download dos vídeos ao carregar a página e ativa loop
-    document.querySelectorAll('video').forEach(video => {
-        video.setAttribute('controlsList', 'nodownload');
-        video.setAttribute('loop', ''); // Ativa o loop
-        video.play(); // Inicia a reprodução ao carregar a página
-    });
+                  // Reproduz apenas em dispositivos não móveis
+                  if (video && !isMobileDevice()) {
+                      video.muted = true;
+                      
+                      // Verifica se o vídeo pode ser reproduzido
+                      const playPromise = video.play();
+                      if (playPromise !== undefined) {
+                          playPromise.catch(error => {
+                              console.warn('Erro ao reproduzir vídeo:', error);
+                          });
+                      }
+
+                      safeUpdateAudioIcon(video, audioIcon);
+                  }
+              } else {
+                  // Pausa e silencia ao sair da área
+                  if (video) {
+                      video.pause();
+                      video.muted = true;
+                      safeUpdateAudioIcon(video, audioIcon);
+                  }
+              }
+          } catch (error) {
+              console.error('Erro no observador de interseção:', error);
+          }
+      });
+  }, observerOptions);
+
+  // Configuração inicial dos elementos
+  const elements = document.querySelectorAll('.product-card, .reel-card');
+  elements.forEach(element => {
+      try {
+          element.style.opacity = 0;
+          element.style.transition = 'opacity 0.5s ease-in-out';
+          intersectionObserver.observe(element);
+      } catch (error) {
+          console.error('Erro ao configurar elemento:', error);
+      }
+  });
+
+  // Gerenciamento de áudio com tratamento de erros
+  document.querySelectorAll('.audio-toggle').forEach(button => {
+      button.addEventListener('click', function () {
+          try {
+              const video = this.closest('.reel-card')?.querySelector('video');
+              const audioIcon = this.querySelector('i');
+
+              if (video) {
+                  video.muted = !video.muted;
+                  safeUpdateAudioIcon(video, audioIcon);
+              }
+          } catch (error) {
+              console.error('Erro ao alternar áudio:', error);
+          }
+      });
+  });
+
+  // Configuração segura de vídeos
+  document.querySelectorAll('video').forEach(video => {
+      try {
+          // Desativa download e configura loop
+          video.setAttribute('controlsList', 'nodownload');
+          video.setAttribute('disablePictureInPicture', '');
+          video.setAttribute('loop', '');
+
+          // Adiciona preload para melhor performance
+          video.setAttribute('preload', 'metadata');
+
+          // Não inicia automaticamente em dispositivos móveis
+          if (!isMobileDevice()) {
+              const playPromise = video.play();
+              if (playPromise !== undefined) {
+                  playPromise.catch(error => {
+                      console.warn('Erro ao reproduzir vídeo:', error);
+                  });
+              }
+          }
+      } catch (error) {
+          console.error('Erro ao configurar vídeo:', error);
+      }
+  });
 });
 
 
