@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prata Joias - Entrega Delivery</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.5;
+            color: #333;
+            background-color: #f8f8f8;
+    
+        }
+        .container {
+            width: 100%;
+            max-width: 1500px;
+            margin: 70px auto;
+            padding: 0 15px;
+            
+        }
+        /* Header Styles */
+        
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #c0c0c0;
+            --text-color: #333;
+            --light-gray: #f5f5f5;
+        }
+
+        header {
+        background-color: var(--primary-color);
+        font-family: 'Playfair Display', serif;
+        padding: 1.1rem;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700; /* Negrito para destaque */
+        }
+
+        h2 {
+            padding-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        p, li  {
+            font-family: 'Playfair Display', serif;
+            font-weight: 400; /* Peso padrão para leitura */
+        }
+        
+
+        .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.2rem 1rem;
+      background-color: var(--primary-color);
+      color: var(--light-gray);
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .logo-icon i {
+      font-size: 2rem;
+      color: var(--light-gray);
+    }
+
+    .logo-main {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    .logo-sub {
+      font-size: 0.8rem;
+      color: var(--accent-color);
+    }
+
+    .desktop-menu ul {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .desktop-menu a {
+      color: var(--light-gray);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .desktop-menu a:hover {
+      color: var(--accent-color);
+    }
+
+    #hamburger-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--light-gray);
+      cursor: pointer;
+      padding: 0.5rem;
+      font-size: 22px;
+    }
+
+    #mobile-menu {
+      background-color: var(--primary-color);
+      padding: 1rem;
+      display: none;
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.3s ease-in-out;
+    }
+
+    #mobile-menu.active {
+      display: block;
+      max-height: 300px;
+    }
+
+    #mobile-menu a {
+      color: var(--light-gray);
+      text-decoration: none;
+      display: block;
+      padding: 0.8rem 0;
+      transition: color 0.3s ease;
+    }
+
+    #mobile-menu a:hover {
+      color: var(--accent-color);
+    }
+
+    @media (max-width: 768px) {
+      .desktop-menu {
+        display: none;
+      }
+
+      #hamburger-btn {
+        display: block;
+      }
+    }
+     
+        
+        /* Delivery Section */
+        .delivery-section {
+            padding: 50px 0;
+            background-color: #f8f8f8;
+            text-align: center;
+            
+        }
+        .delivery-card {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 30px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .delivery-options {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .delivery-option {
+            flex-basis: calc(50% - 15px);
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        @media (max-width: 600px) {
+            .delivery-option {
+                flex-basis: 100%;
+            }
+        }
+
+
+        .cta-button {
+            display: inline-block;
+            background-color: #f4c430;
+            color: #333;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: #e6b820;
+        }
+
+                /* [Previous CSS remains the same] */
+                .delivery-details {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .delivery-details > div {
+            width: 48%;
+            background-color: #f9f9f9;
+            padding: 15px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .delivery-details h4 {
+            color: #333;
+            border-bottom: 2px solid #f4c430;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+
+
+
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="nav-container">
+          <div class="logo-container">
+            <div class="logo-icon">
+              <i class="fas fa-gem"></i>
+            </div>
+            <div class="logo-text">
+              <div class="logo-main">PRATA JOIAS</div>
+              <div class="logo-sub">ELEGÂNCIA & SOFISTICAÇÃO</div>
+            </div>
+          </div>
+    
+          <div class="desktop-menu">
+            <ul>
+              <li><a href="./index.html">Home</a></li>
+              <li><a href="./entrega.html">Entrega Delivery</a></li>
+              <li><a href="./quemsamos.html">Quem Somos</a></li>
+            </ul>
+          </div>
+    
+          <button id="hamburger-btn">
+            <i class="fas fa-bars text-2xl"></i>
+          </button>
+        </nav>
+    
+        <div id="mobile-menu">
+          <a href="./index.html">Home</a>
+          <a href="./entrega.html">Entrega Delivery</a>
+          <a href="./quemsamos.html">Quem Somos</a>
+        </div>
+      </header>
+
+      
+
+    <section class="delivery-section container">
+
+        <h2>Serviço de Entrega</h2>
+        
+        <div class="delivery-details">
+            <div>
+                <h4>Áreas de Cobertura</h4>
+                <p>Atendemos prioritariamente a região de Jacarepaguá e áreas adjacentes no Rio de Janeiro. Consulte nossa central para verificar cobertura específica do seu bairro.</p>
+            </div>
+            <div>
+                <h4>Tempo de Entrega</h4>
+                <p>Prazo médio de entrega: 1-2 dias úteis após confirmação do pagamento. Entregas expressas disponíveis com taxa adicional.</p>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="delivery-card">
+            <h3>Nossas Opções de Entrega</h3>
+            <div class="delivery-options">
+                <div class="delivery-option">
+                    <h4>Entrega Expressa</h4>
+                    <p>Entrega rápida em até 2 horas para áreas próximas.</p>
+                </div>
+                <div class="delivery-option">
+                    <h4>Retirada em Loja</h4>
+                    <p>Retire sua joia em nossos pontos de venda autorizados.</p>
+                </div>
+                <div class="delivery-option">
+                    <h4>Delivery Tradicional</h4>
+                    <p>Entrega padrão em 1-3 dias úteis para toda região.</p>
+                </div>
+                <div class="delivery-option">
+                    <h4>Entrega Segura</h4>
+                    <p>Rastreamento e embalagem especial para suas joias.</p>
+                </div>
+            </div>
+            <a href="./index.html" class="cta-button">Volta para tela inicial</a>
+        </div>
+
+    </section>
+
+    <script>
+     
+     const hamburgerBtn = document.getElementById('hamburger-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    // Função para fechar o menu
+    function closeMenu() {
+      mobileMenu.classList.remove('active');
+    }
+
+    // Toggle do menu ao clicar no hamburger
+    hamburgerBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('active');
+    });
+
+    // Fechar menu ao rolar a página
+    let lastScrollTop = 0;
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      if (scrollTop > lastScrollTop) {
+        closeMenu();
+      }
+      lastScrollTop = scrollTop;
+    });
+
+    // Fechar menu quando a orientação da tela mudar
+    window.addEventListener('orientationchange', closeMenu);
+
+    // Fechar menu quando a janela for redimensionada
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 768) {
+        closeMenu();
+      }
+    });
+
+    // Fechar menu ao clicar em um link
+    const mobileLinks = mobileMenu.querySelectorAll('a');
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', closeMenu);
+    });
+
+ 
+
+    </script>
+</body>
+</html>

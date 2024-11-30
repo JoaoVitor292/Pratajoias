@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prata Joias - Elegância em Cada Detalhe</title>
+    <link rel="stylesheet" href="./estilo.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    
+</head>
+<body>
+    
+
+  <header>
+    <nav class="nav-container">
+      <div class="logo-container">
+        <div class="logo-icon">
+          <i class="fas fa-gem"></i>
+        </div>
+        <div class="logo-text">
+          <div class="logo-main">PRATA JOIAS</div>
+          <div class="logo-sub">ELEGÂNCIA & SOFISTICAÇÃO</div>
+        </div>
+      </div>
+
+      <div class="desktop-menu">
+        <ul>
+          <li><a href="./index.html">Home</a></li>
+          <li><a href="./entrega.html">Entrega Delivery</a></li>
+          <li><a href="./quemsamos.html">Quem Somos</a></li>
+        </ul>
+      </div>
+
+      <button id="hamburger-btn">
+        <i class="fas fa-bars text-2xl"></i>
+      </button>
+    </nav>
+
+    <div id="mobile-menu">
+      <a href="./index.html">Home</a>
+      <a href="./entrega.html">Entrega Delivery</a>
+      <a href="./quemsamos.html">Quem Somos</a>
+    </div>
+  </header>
+
+    <div class="location-bar">
+        <i class="fas fa-map-marker-alt"></i>
+        Jacarepaguá, Rio de Janeiro - RJ
+    </div>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Elegância em Prata</h1>
+            <p>Descubra nossa coleção exclusiva de joias em prata</p>
+            <a href="#products" class="cta-button">Ver Produtos</a>
+        </div>
+    </section>
+
+    <section class="reels-section">
+        <div class="reels-container">
+            <h2 class="reels-title">Nossas Joias em Ação</h2>
+            <div class="reels-grid">
+                <div class="reel-card">
+                    
+                       <!-- Exibe o vídeo -->
+                <video src="./videos/videoreels.mp4" class="reel-placeholder" controls autoplay muted>
+                    Seu navegador não suporta a reprodução de vídeo.
+                </video>
+
+                <button class="audio-toggle">
+                    <i class="fas fa-volume-mute"></i>
+                </button>
+                </div>
+                
+               
+            </div>
+        </div>
+    </section>
+
+ 
+    <section id="carousel-section" class="carousel-section"> 
+        <!-- Texto adicional para grandes telas -->
+        <div class="carousel-description">
+          <h2>Explore Nossos Produtos</h2>
+          <p id="carousel-text">Descubra uma seleção incrível de joias finas em prata 925, cuidadosamente trabalhadas para trazer sofisticação e elegância ao seu estilo. Confira nossos descontos e aproveite as melhores ofertas.</p>
+        </div>
+      
+        <div class="carousel-container">
+          <div class="carousel-inner">
+            <!-- Slide de um produto -->
+            <div id="slide1" class="carousel-item">
+              <img src="./img/colar.jpg" alt="Colar Elegance" class="carousel-image">
+              <div class="carousel-info">
+                <h3 class="carousel-title">Colar Elegance</h3>
+                <div class="rating-stars">⭐⭐⭐⭐⭐</div>
+                <p class="carousel-discount">15% OFF</p>
+                <button class="acquire-btn" onclick="goToProduct('colar-elegance')">Adquirir Agora</button>
+              </div>
+            </div>
+      
+            <!-- Slide de outro produto -->
+            <div id="slide2" class="carousel-item">
+              <img src="./img/anel.jpg" alt="Anel Solitário" class="carousel-image">
+              <div class="carousel-info">
+                <h3 class="carousel-title">Anel Solitário</h3>
+                <div class="rating-stars">⭐⭐⭐⭐⭐</div>
+                <p class="carousel-discount">15% OFF</p>
+                <button class="acquire-btn" onclick="goToProduct('anel-solitario')">Adquirir Agora</button>
+              </div>
+            </div>
+      
+            <!-- Novo slide: Pulseira -->
+            <div id="slide3" class="carousel-item">
+              <img src="./img/anel.jpg" alt="Pulseira Charm" class="carousel-image">
+              <div class="carousel-info">
+                <h3 class="carousel-title">Pulseira Charm</h3>
+                <div class="rating-stars">⭐⭐⭐⭐⭐</div>
+                <p class="carousel-discount">20% OFF</p>
+                <button class="acquire-btn" onclick="goToProduct('pulseira-charm')">Adquirir Agora</button>
+              </div>
+            </div>
+      
+            <!-- Novo slide: Pingente -->
+            <div id="slide4" class="carousel-item">
+              <img src="./img/colar.jpg" alt="Pingente Elegante" class="carousel-image">
+              <div class="carousel-info">
+                <h3 class="carousel-title">Pingente Elegante</h3>
+                <div class="rating-stars">⭐⭐⭐⭐⭐</div>
+                <p class="carousel-discount">10% OFF</p>
+                <button class="acquire-btn" onclick="goToProduct('pingente-elegante')">Adquirir Agora</button>
+              </div>
+            </div>
+          </div>
+      
+          <button class="carousel-control prev" onclick="prevSlide()">&#10094;</button>
+          <button class="carousel-control next" onclick="nextSlide()">&#10095;</button>
+        </div>
+      </section>
+      
+    
+    
+    
+    
+
+    <section id="products" class="products">
+        <div id="colar-elegance" class="product-card">
+            <img src="./img/colar.jpg" alt="Colar de Prata" class="product-image">
+            <div class="product-info">
+                <h3 class="product-title">Colar Elegance</h3>
+                <p>Colar delicado em prata 925</p>
+                <p class="product-price">R$ 199,90</p>
+                <div class="product-options">
+                    <div class="option-group">
+                        <label for="size-colar">Tamanho:</label>
+                        <select id="size-colar">
+                            <option value="40cm">40 cm</option>
+                            <option value="45cm">45 cm</option>
+                            <option value="50cm">50 cm</option>
+                        </select>
+                    </div>
+                    <div class="option-group">
+                        <label for="qty-colar">Quantidade:</label>
+                        <input type="number" id="qty-colar" min="1" value="1">
+                    </div>
+                    <button class="add-to-cart" onclick="addToCart('Colar Elegance', 199.90, 'colar')">
+                        Adicionar ao Carrinho
+                    </button>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="anel-solitario" class="product-card">
+            <img src="./img/anel.jpg" alt="Anel de Prata" class="product-image">
+            <div class="product-info">
+                <h3 class="product-title">Anel Solitário</h3>
+                <p>Anel em prata 925 com zircônia</p>
+                <p class="product-price">R$ 149,90</p>
+                <div class="product-options">
+                    <div class="option-group">
+                        <label for="size-anel">Tamanho:</label>
+                        <select id="size-anel">
+                            <option value="16">16</option>
+                            <option value="17">17</option>
+                            <option value="18">18</option>
+                            <option value="19">19</option>
+                        </select>
+                    </div>
+                    <div class="option-group">
+                        <label for="qty-anel">Quantidade:</label>
+                        <input type="number" id="qty-anel" min="1" value="1">
+                    </div>
+                    <button class="add-to-cart" onclick="addToCart('Anel Solitário', 149.90, 'anel')">
+                        Adicionar ao Carrinho
+                    </button>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="pulseira-charm" class="product-card">
+            <img src="./img/anel.jpg" alt="Anel de Prata" class="product-image">
+            <div class="product-info">
+                <h3 class="product-title">Pulseira</h3>
+                <p>Pulseira em prata 925 com zircônia</p>
+                <p class="product-price">R$ 119,90</p>
+                <div class="product-options">
+                    <div class="option-group">
+                        <label for="size-anel">Tamanho:</label>
+                        <select id="size-anel">
+                            <option value="16">16</option>
+                            <option value="17">17</option>
+                            <option value="18">18</option>
+                            <option value="19">19</option>
+                        </select>
+                    </div>
+                    <div class="option-group">
+                        <label for="qty-anel">Quantidade:</label>
+                        <input type="number" id="qty-anel" min="1" value="1">
+                    </div>
+                    <button class="add-to-cart" onclick="addToCart('Anel Solitário', 149.90, 'anel')">
+                        Adicionar ao Carrinho
+                    </button>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="pingente-elegante" class="product-card">
+            <img src="./img/anel.jpg" alt="Anel de Prata" class="product-image">
+            <div class="product-info">
+                <h3 class="product-title">Pingente Elegante</h3>
+                <p>Pingente Elegante em prata 739 com zircônia</p>
+                <p class="product-price">R$ 176,90</p>
+                <div class="product-options">
+                    <div class="option-group">
+                        <label for="size-anel">Tamanho:</label>
+                        <select id="size-anel">
+                            <option value="16">16</option>
+                            <option value="17">17</option>
+                            <option value="18">18</option>
+                            <option value="19">19</option>
+                        </select>
+                    </div>
+                    <div class="option-group">
+                        <label for="qty-anel">Quantidade:</label>
+                        <input type="number" id="qty-anel" min="1" value="1">
+                    </div>
+                    <button class="add-to-cart" onclick="addToCart('Anel Solitário', 149.90, 'anel')">
+                        Adicionar ao Carrinho
+                    </button>
+                </div>
+            </div>
+        </div>
+       
+
+        <!-- ... Outros produtos com suas respectivas opções ... -->
+    </section>
+
+    <div class="cart" id="cart">
+        <h3 class="cart-title">Seu Carrinho</h3>
+        <div class="cart-items"></div>
+        <div class="cart-total">Total: R$ 0,00</div>
+        <div class="cart-actions">
+            <button class="cart-clear" onclick="clearCart()">Limpar Carrinho</button>
+            <button class="cart-order" onclick="sendOrderToWhatsApp()">Finalizar Pedido</button>
+        </div>
+    </div>
+
+    
+    
+    <div class="payment-dropdown">
+      <button class="dropdown-btn">
+          Formas de Pagamento
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m6 9 6 6 6-6"/>
+          </svg>
+      </button>
+      <div class="dropdown-content">
+          <div class="payment-category">
+              <h3>Linha de Crédito</h3>
+              <div class="payment-icons">
+                  <div class="payment-icon">
+                      <img src="https://http2.mlstatic.com/storage/logos-api-admin/b4534650-571b-11e8-95d8-631c1a9a92a9-m.svg" alt="Mercado Crédito">
+                  </div>
+              </div>
+          </div>
+          <div class="payment-category">
+              <h3>Cartões de crédito</h3>
+              <div class="payment-icons">
+                  <div class="payment-icon">
+                      <img src="https://http2.mlstatic.com/storage/logos-api-admin/ddf23a60-f3bd-11eb-a186-1134488bf456-m.svg" alt="Hipercard">
+                  </div>
+                  <div class="payment-icon">
+                      <img src="https://http2.mlstatic.com/storage/logos-api-admin/37f7b160-6278-11ec-ae75-df2bef173be2-m.svg" alt="Elo">
+                  </div>
+                  <div class="payment-icon">
+                      <img src="https://http2.mlstatic.com/storage/logos-api-admin/a5f047d0-9be0-11ec-aad4-c3381f368aaf-m.svg" alt="Visa">
+                  </div>
+                  <div class="payment-icon">
+                      <img src="https://http2.mlstatic.com/storage/logos-api-admin/aa2b8f70-5c85-11ec-ae75-df2bef173be2-m.svg" alt="Mastercard">
+                  </div>
+              </div>
+          </div>
+          <div class="payment-category">
+              <h3>Cartões de débito</h3>
+              <div class="payment-icons">
+                  <div class="payment-icon">
+                      <img src="https://http2.mlstatic.com/storage/logos-api-admin/1e7db140-6f0b-11ec-813c-8542a9aff8ea-m.svg" alt="Santander Rio">
+                  </div>
+                  <div class="payment-icon">
+                      <img src="https://http2.mlstatic.com/storage/logos-api-admin/d2407420-f3bd-11eb-8e0d-6f4af49bf82e-m.svg" alt="Caixa">
+                  </div>
+              </div>
+          </div>
+          <div class="payment-category">
+              <h3>Pix</h3>
+              <div class="payment-icons">
+                  <div class="payment-icon">
+                      <img src="https://http2.mlstatic.com/storage/logos-api-admin/f99fcca0-f3bd-11eb-9984-b7076edb0bb7-m.svg" alt="Pix">
+                  </div>
+              </div>
+          </div>
+        
+      </div>
+  </div>
+    
+    
+    
+    
+    <button class="cart-toggle" onclick="toggleCart()">🛒<span class="cart-count">0</span></button>
+
+    
+
+    <footer class="bg-gray-100 py-8 px-4 transition-all duration-300 hover:bg-gray-50">
+      <div class="container mx-auto flex flex-col md:flex-row items-center justify-between">
+
+        <div class="text-center md:text-left mb-4 md:mb-0 flex items-center">
+          <i class="fas fa-gem text-gray-700 mr-3 text-2xl"></i>
+      </div>
+      
+          <div class="text-center md:text-left mb-4 md:mb-0">
+              <p class="text-gray-700 font-semibold">&copy; 2024 Prata Joias. Todos os direitos reservados.</p>
+          </div>
+          
+          <br>
+          
+          <div class="flex items-center space-x-4">
+            <a href="" 
+            target="_blank" 
+            class="text-pink-600 hover:text-pink-800 transition-transform transform hover:scale-110 group">
+            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" class="transform transition-transform duration-300 hover:scale-110">
+              <defs>
+                  <linearGradient id="instaGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" style="stop-color:#405DE6" />
+                      <stop offset="25%" style="stop-color:#5851DB" />
+                      <stop offset="50%" style="stop-color:#833AB4" />
+                      <stop offset="75%" style="stop-color:#C13584" />
+                      <stop offset="100%" style="stop-color:#FD1D1D" />
+                  </linearGradient>
+              </defs>
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="url(#instaGradient)" />
+              <path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zm0 8c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3z" fill="white"/>
+              <circle cx="16.5" cy="7.5" r="1.5" fill="white" />
+          </svg>
+                  </a>
+                  
+                  <div class="text-sm text-gray-600 hover:text-gray-800 transition-colors">
+                    Nos siga no Instagram
+                  </div>
+
+                  
+          </div>
+      </div>
+  </footer>
+
+    <script src="./javascript.js">
+
+
+
+
+    </script>
+</body>
+</html>
